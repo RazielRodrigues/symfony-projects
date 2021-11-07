@@ -1,1 +1,2 @@
-# symfony-5-advanced
+# Symfony 5
+
