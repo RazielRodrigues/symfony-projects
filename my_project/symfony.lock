@@ -91,6 +91,15 @@
     "nikic/php-parser": {
         "version": "v4.13.1"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.5.1"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -218,6 +227,12 @@
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
     },
+    "symfony/property-access": {
+        "version": "v5.3.8"
+    },
+    "symfony/property-info": {
+        "version": "v5.3.8"
+    },
     "symfony/proxy-manager-bridge": {
         "version": "v5.3.4"
     },
@@ -235,6 +250,9 @@
         ]
     },
     "symfony/runtime": {
+        "version": "v5.3.10"
+    },
+    "symfony/serializer": {
         "version": "v5.3.10"
     },
     "symfony/service-contracts": {
@@ -279,5 +297,8 @@
     },
     "twig/twig": {
         "version": "v3.3.3"
+    },
+    "webmozart/assert": {
+        "version": "1.10.0"
     }
 }
