@@ -1,10 +1,14 @@
 # Symfony 5
 
-#### Install
-- composer create-project symfony/skeleton my_project_name
-- php -S 127.0.0.1:8000 -t public
+    composer create-project symfony/skeleton my_project_name
+    php -S 127.0.0.1:8000 -t public
 
-#### Controllers return methods:
+## Controllers
+
+    php bin/console make:controller ControllerName
+
+#### Methods
+
     //? Return to a page with parameter to access from twig
     return $this->render('default/index.html.twig', ['controller_name' => 'DefaultController',]);
 
@@ -20,4 +24,22 @@
     //? Create a new response object
     return new Response('from controller default 1');
 
-#### Models
+    //? Redirect to another page
+    return forward('default1');
+
+## Models
+
+    composer require doctrine
+
+    -- After config .env
+    php bin/console doctrine:database:create
+
+    php bin/console make:entitity EntityName
+
+    php bin/console make:migrations
+
+    php bin/console doctrine:migrations:migrate
+
+#### Methods
+
+
