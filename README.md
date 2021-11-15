@@ -182,11 +182,11 @@
 
 ## Events e listeners
 
-...
+    Listen to an action in the system and do something after or before it
 
 #### Methods
 
-...
+    
 
 ## Others
 
