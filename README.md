@@ -42,4 +42,22 @@
 
 #### Methods
 
-
+    Lazy loading: when you get all data like findAll()
+    Eager loading: when you create a method inside entity and return specific data
+    
+    one to one relationship
+        - relation in the field of new entity
+        - choose the table that refrences
+        - to remove all when delete: cascade = remove or orphanRemove = true
+    
+    polymorphic queries returns a various type of object
+        - create a abstract class ex: file 
+            - video and pdf class extends file
+        - remove get and set id method from child classes
+        - have some ORM rules to be put inside abstract class
+            /**
+            * @ORM\InheritanceType("JOINED") // Create a table for each class
+            * @ORM\InheritanceType("SINGLE_TABLE") // One table for all class
+            * @ORM\DiscriminatorColumn(name="type", type="string") // The column that have the object type
+            * @ORM\DiscriminatorMap({"video"="Video" , "pdf"="Pdf"}) // Link with the class
+            */
