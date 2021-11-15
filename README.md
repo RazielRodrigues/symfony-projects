@@ -1,15 +1,49 @@
-# Symfony 5
+# Symfony 5 features
 
     composer create-project symfony/skeleton my_project_name
     php -S 127.0.0.1:8000 -t public
 
 ## Routes
 
-...
+    Handle requests, can be defined by php, annotations or yaml file
 
 #### Methods
 
-...
+    /**
+    * @Route("/blog/{page?}", name="blog_list", requirements={"page"="\d+"})
+    */
+    public function index2()
+    {
+        return new Response('Optional parameters in url and 
+        requirements for parameters');
+    }
+
+    /**
+    * @Route(
+    *      "/articles/{_locale}/{year}/{slug}/{category}",
+    *      defaults={"category": "computers"},
+    *      requirements={
+    *         "_locale": "en|fr", 
+    *          "category": "computers|rtv",
+    *          "year": "\d+"
+    *      }    
+    * )
+    */
+    public function index3()
+    {
+        return new Response('An advanced route example');
+    }
+
+    /**
+    * @Route({
+    *      "nl": "/over-ons",
+    *       "en": "/about-us"
+    * }, name="about_us")
+    */
+    public function index4()
+    {
+        return new Response('Translated routes');
+    }
 
 ## Controllers
 
@@ -26,7 +60,7 @@
     //? Redirect to a link
     // return $this->redirect('google.com');
 
-    //? Redirect to a  Route with or not paramaters
+    //? Redirect to a  Route with or not parameters
     // return $this->redirectToRoute('default2');
 
     //? Create a new response object
@@ -37,12 +71,19 @@
 
 ## Views
 
-...
+    Display html file
 
 #### Methods
 
-...
+    tags, filters, functions tests and operators
 
+    generate URL and escape string
+
+    global variables
+
+    webpack encore
+
+    app variable
 
 ## Entities
 
@@ -51,7 +92,7 @@
     -- After config .env
     php bin/console doctrine:database:create
 
-    php bin/console make:entitity EntityName
+    php bin/console make:entity EntityName
 
     php bin/console make:migrations
 
@@ -64,7 +105,7 @@
     
     one to one relationship
         - relation in the field of new entity
-        - choose the table that refrences
+        - choose the table that references
         - to remove all when delete: cascade = remove or orphanRemove = true
     
     polymorphic queries returns a various type of object
@@ -81,7 +122,7 @@
 
 ## Services
 
-...
+    Classes that do something useful
 
 #### Methods
 
@@ -139,7 +180,7 @@
             dump($acer->get());
 
 
-## 
+## Events e listeners
 
 ...
 
