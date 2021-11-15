@@ -3,6 +3,14 @@
     composer create-project symfony/skeleton my_project_name
     php -S 127.0.0.1:8000 -t public
 
+## Routes
+
+...
+
+#### Methods
+
+...
+
 ## Controllers
 
     php bin/console make:controller ControllerName
@@ -27,7 +35,16 @@
     //? Redirect to another page
     return forward('default1');
 
-## Models
+## Views
+
+...
+
+#### Methods
+
+...
+
+
+## Entities
 
     composer require doctrine
 
@@ -61,3 +78,17 @@
             * @ORM\DiscriminatorColumn(name="type", type="string") // The column that have the object type
             * @ORM\DiscriminatorMap({"video"="Video" , "pdf"="Pdf"}) // Link with the class
             */
+
+## Services
+
+...
+
+#### Methods
+
+...
+
+
+## Others
+
+...
+
