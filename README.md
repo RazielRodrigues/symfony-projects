@@ -322,7 +322,7 @@
             private $title;
     
     - events
-        - create an event inside form class
+        * create an event inside form class
 
             $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event){
 
@@ -345,6 +345,56 @@
 
     - add mapped => false to don't map the form field from the entity
 
+## Emails
+
+    composer require symfony/swiftmailler-bundle
+        * need to configure
+
+        - spool don't send the email instantantly
+            swiftmailer:
+            url: '%env(MAILER_URL)%'
+            spool:
+                type: file
+                path: '%kernel.project_dir%/var/spool'
+
+        - Mailer URL
+
+## Methods
+
+    - create a twig file to be the email template
+    - call inside controller
+
+        $message = (new \Swift_Message('Hello Email'))
+        ->setFrom('send@example.com')
+        ->setTo('recipient@example.com')
+        ->setBody(
+            $this->renderView(
+                'emails/registration.html.twig',
+                array('name' => 'Robert')
+            ),
+            'text/html'
+        );
+        $mailer->send($message);
+
+    - test email
+
+        php bin/console make:functional-test
+
+        $client = static::createClient();
+        $client->enableProfiler();
+        $crawler = $client->request('GET', '/home');
+
+        $mailCollector = $client->getProfile()->getCollector('swiftmailer');
+        $this->assertSame(1, $mailCollector->getMessageCount());
+
+        $collectedMessages = $mailCollector->getMessages();
+        $message = $collectedMessages[0];
+
+        $this->assertInstanceOf('Swift_Message', $message);
+        $this->assertSame('Hello Email', $message->getSubject());
+        $this->assertSame('send@example.com', key($message->getFrom()));
+        $this->assertSame('recipient@example.com', key($message->getTo()));
+        $this->assertContains('You did it! You registered!', $message->getBody());
 
 ## Others topics
 
@@ -354,5 +404,3 @@
     - post e get data
     - custom error pages
     - handle exceptions
-
-
