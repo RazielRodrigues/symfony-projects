@@ -181,14 +181,86 @@
 
 
 ## Events e listeners
-
+    
     Listen to an action in the system and do something after or before it
+    * events you need to specify inside service.yaml not best way
+        # App\Listeners\VideoCreatedListener:
+        #     tags:
+        #         - { name: kernel.event_listener, event: video.created.event, method: onVideoCreatedEvent }
+    * subscriber not because always know which events is listening
 
 #### Methods
 
-    
+    - Create a listener class inside listener folder this class holds the methods you want to execute
 
-## Others
+        namespace App\Listeners;
+        class VideoCreatedListener  {
+            public function onVideoCreatedEvent($event)
+            {
+                //some entity property
+                dump($event->video->title);
+            }
+        }
+
+    - Create a event class inside events folder (if aren't using event subscribers)
+
+        namespace App\Events;
+        use Symfony\Component\EventDispatcher\Event;
+        class VideoCreatedEvent extends Event {
+            public function __construct($video)
+            {
+                $this->video = $video;
+            }
+        }
+    
+    - debug with debug:event-dispatcher video.created.event
+
+    - call inside the controller
+
+        public function __construct(EventDispatcherInterface $dispatcher)
+        {
+            $this->dispatcher = $dispatcher;
+        }
+
+        public function index(Request $request)
+        {
+            $video = new \stdClass();
+            $video->title = 'Funny movie';
+            $video->category = 'funny';
+            //When create a new video show the title of the video
+            $event = new VideoCreatedEvent($video);
+            $this->dispatcher->dispatch('video.created.event', $event);
+        }  
+            
+
+    - php bin/console make:subscriber
+
+    class VideoCreatedSubscriber implements EventSubscriberInterface
+    {
+        //The method you want to execute
+        public function onVideoCreatedEvent($event)
+        {
+            dump($event->video->title);
+        }
+
+        //other method
+        public function onKernelResponse(FilterResponseEvent $event)
+        {
+            $response = new Response('dupa');
+            // $event->setResponse($response);
+        }
+
+        public static function getSubscribedEvents()
+        {
+            //name to call inside controller
+            return [
+            'video.created.event' => 'onVideoCreatedEvent',
+            KernelEvents::RESPONSE => 'onKernelResponse',
+            ];
+        }
+    }
+
+## Others topics
 
     - flash messages
     - cookies
