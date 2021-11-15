@@ -396,6 +396,14 @@
         $this->assertSame('recipient@example.com', key($message->getTo()));
         $this->assertContains('You did it! You registered!', $message->getBody());
 
+## Security
+
+    ...
+
+#### Methods
+
+    ...
+
 ## Others topics
 
     - flash messages
