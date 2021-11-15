@@ -85,10 +85,75 @@
 
 #### Methods
 
+    - auto wire
+        - automatic configure the service in the container interface
+
+    - @required
+        - this annotation transform a normal method like a construct can use with traits to do optional constructs for my classes
+
+    - lazy load services options
+        - create a instance only if the method that use the service is called
+        - requires a proxy-bridge-package
+    
+    - tags
+        - you can add a listener inside your service to execute some method when a action occurs ex: flush doctrine
+    
+    - parameters
+        - can be set default parameters at service.yaml
+
+    - aliases
+        - you can create aliases to the services
+
+    - service interface
+        - can change service.yaml file
+
+## Cache
+
+    composer require symfony/cache
+
+#### Methods
+    
+        - create a cache and delete it also can add expire time
+            $cache = new FilesystemAdapter();
+            $posts_from_db = ['post 1', 'post 2', 'post 3']
+            $posts->set(serialize($posts_from_db));
+            $posts->expiresAfter(5);
+            $posts = $cache->getItem('database.get_posts');
+            $cache->deleteItem('database.get_posts');
+            $cache->clear();
+            dump(unserialize($posts->get()));
+        
+        - create cache with tags
+            $cache = new TagAwareAdapter(
+                new FilesystemAdapter()
+            );
+            $acer = $cache->getItem('acer');
+            if (!$acer->isHit())
+            {
+                $acer_from_db = 'acer laptop';
+                $acer->set($acer_from_db);
+                $acer->tag(['computers','laptops','acer']);
+                $cache->save($acer);
+            }
+            $cache->invalidateTags(['computers']);
+            dump($acer->get());
+
+
+## 
+
 ...
 
+#### Methods
+
+...
 
 ## Others
 
-...
+    - flash messages
+    - cookies
+    - session
+    - post e get data
+    - custom error pages
+    - handle exceptions
+
 
