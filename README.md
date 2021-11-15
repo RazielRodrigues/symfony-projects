@@ -260,6 +260,92 @@
         }
     }
 
+
+## Forms
+
+    Create forms based in entities
+
+    php bin/console make:form entityName
+
+#### Methods
+
+    - customize form class
+
+    - add themes inside twig.yaml
+        form_themes: ['bootstrap_4_layout.html.twig']
+        
+    - also can define inside twig files
+        {% form_theme form 'form_table_layout.html.twig' %}
+
+    - call with {{ form(form) }} inside twig template
+        {{ form_start(form) }}
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+            {{ form_widget(form.title) }} // can access specific properties
+        {{ form_end(form) }}
+
+    - call inside controller
+
+        $entityManager = $this->getDoctrine()->getManager();
+        // $videos = $entityManager->getRepository(Video::class)->findAll();
+        // dump($videos);
+        // $video = new Video();
+        // $video->setTitle('Write a blog post');
+        // $video->setCreatedAt(new \DateTime('tomorrow'));
+        $video = $entityManager->getRepository(Video::class)->find(1);
+
+        $form = $this->createForm(VideoFormType::class, $video);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->persist($video);
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'form' => $form->createView(),
+        ]);
+
+    - validations
+
+        composer require symfony/validator doctrine/annotations
+        - set the annotation inside entity
+
+            // @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
+            /**
+            * @ORM\Column(type="string", length=255)
+            * @Assert\NotBlank()
+            * @Assert\Length(min = 2, max = 10, minMessage = "Video title must be at least {{ limit }} characters long", maxMessage = "Video title cannot be longer than {{ limit }} characters")
+            */
+            private $title;
+    
+    - events
+        - create an event inside form class
+
+            $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event){
+
+                $video = $event->getData();
+                $form = $event->getForm();
+                if (!$video || null === $video->getId())
+                {
+                    $form->add('created_at', DateType::class, [
+                        'label' => 'Set date',
+                        'widget' => 'single_text',
+                    ]);
+                }
+
+            });
+
+    - upload files
+        - set file annotations inside entity class
+        - add file type inside form class
+        - $form->file->get("file")->getData()
+
+    - add mapped => false to don't map the form field from the entity
+
+
 ## Others topics
 
     - flash messages
