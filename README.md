@@ -1,6 +1,7 @@
-# Symfony 5 features
+# Symfony Core Features
 
     composer create-project symfony/skeleton my_project_name
+    
     php -S 127.0.0.1:8000 -t public
 
 ## Routes
@@ -558,3 +559,17 @@
     - post e get data
     - custom error pages
     - handle exceptions
+    - LDAP
+    - voters
+    - Web Link
+    - Web assets
+    - Webpack encore
+    - bundles
+    - locks
+    - workflow
+    - strings / unicode
+    - UID / UUID
+    - parser
+    - serialization
+    - notifications
+    
