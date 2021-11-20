@@ -398,7 +398,75 @@
 
 ## Security
 
-    ...
+    Used to set security inside project specially when is about login
+
+    composer require security
+
+#### Methods
+
+    - create a user entity
+    - create registration form
+    - create login form
+    - create routes
+    - CSRF token
+
+    - security.yaml (extra configs)
+
+        firewalls:
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+            main:
+                anonymous: true
+
+                # activate different ways to authenticate
+
+                # http_basic: true
+                # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+                form_login:
+                    login_path: login
+                    check_path: login
+                # https://symfony.com/doc/current/security/form_login_setup.html
+            # csrf_token_generator: security.csrf.token_manager
+                    username_parameter: 'email'
+                    password_parameter: 'password'
+                    csrf_token_generator: security.csrf.token_manager
+
+                logout:
+                    path:   /logout
+                    target: /home
+
+                remember_me:
+                    secret: '%kernel.secret%'
+                    lifetime: 604800 # 1 week in seconds
+                    #always_remember_me: true
+                    path: /
+
+    - security authorization with annotation
+        /**
+        * needs to add expression languages pack
+        * @Route("/home/{id}/delete-video", name="home")
+        * @Security("user.getId() == video.getSecurityUser().getId()") // only the owner of can do the action
+        * or
+        * @Security("has_role('ROLE_ADMIN')") // only admin can do the action
+        */
+
+    - security authorization with denyAccess Method
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+    - security authorization inside view
+        if is_granted()
+
+    - security authorization with voter
+        create voter class
+        call inside controller $this->denyAccessUnlessGranted();
+
+# Unit test
+
+    create tests
+
+    composer require symfony/phpunit-bridge
 
 #### Methods
 
