@@ -462,15 +462,93 @@
         create voter class
         call inside controller $this->denyAccessUnlessGranted();
 
-# Unit test
+# Tests
 
-    create tests
+    - Unit tests is to test functions and result of those
+        - composer require symfony/phpunit-bridge
 
-    composer require symfony/phpunit-bridge
+    - Function tests is to test the functionality of a page
+        - composer require symfony/test-pack
+
+    - run the tests with ./bin/phpunit
+
+    - code coverage
 
 #### Methods
 
-    ...
+    - create the unit test with make
+        // Example function
+        public function testSomething()
+        {
+            $calculator = new Calculator();
+            $result = $calculator->add(1,9);
+            $this->assertEquals(10,$result);
+        }
+
+    - create the functional test with make
+    - can use provide URL (do a test in a lot of url)
+    - test with database
+        - option 1: set a specific database to test
+        - option 2: use transaction
+
+    - example function test class
+        namespace App\Tests;
+
+        use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+        use App\Entity\Video;
+
+        class DefaultControllerTest extends WebTestCase
+        {
+
+            private $entityManager;
+
+            protected function setUp()
+            {
+                parent::setUp();
+                $this->client = static::createClient();
+
+                $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+                $this->entityManager->beginTransaction();
+                $this->entityManager->getConnection()->setAutoCommit(false);
+            }
+
+            protected function tearDown()
+            {
+                $this->entityManager->rollback();
+                $this->entityManager->close();
+                $this->entityManager = null;
+            }
+
+            /**
+            * @dataProvider provideUrls
+            */
+            public function testSomething($url)
+            {
+                $crawler = $this->client->request('GET', $url);
+                $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+                $video = $this->entityManager
+                    ->getRepository(Video::class)
+                    ->find(1);
+
+                $this->entityManager->remove($video);
+                $this->entityManager->flush();
+
+                $this->assertNull($this->entityManager
+                ->getRepository(Video::class)
+                ->find(1));
+        
+            }
+
+            public function provideUrls()
+            {
+                return [
+                    ['/home'],
+                    ['/login']
+                ];
+            }
+        }
 
 ## Others topics
 
