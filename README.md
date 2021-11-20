@@ -359,7 +359,7 @@
 
         - Mailer URL
 
-## Methods
+#### Methods
 
     - create a twig file to be the email template
     - call inside controller
@@ -462,7 +462,7 @@
         create voter class
         call inside controller $this->denyAccessUnlessGranted();
 
-# Tests
+## Tests
 
     - Unit tests is to test functions and result of those
         - composer require symfony/phpunit-bridge
