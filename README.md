@@ -1,7 +1,12 @@
 # Symfony Core Features
 
     composer create-project symfony/skeleton my_project_name
-    
+
+    composer require symfony/apache-pack
+    composer require symfony/maker-bundle --dev
+    composer require doctrine/annotations
+    composer require twig
+
     php -S 127.0.0.1:8000 -t public
 
 ## Routes
