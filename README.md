@@ -1,7 +1,12 @@
 # Symfony Core Features
 
     composer create-project symfony/skeleton my_project_name
-    
+
+    composer require symfony/apache-pack
+    composer require symfony/maker-bundle --dev
+    composer require doctrine/annotations
+    composer require twig
+
     php -S 127.0.0.1:8000 -t public
 
 ## Routes
@@ -103,6 +108,10 @@
 
     Lazy loading: when you get all data like findAll()
     Eager loading: when you create a method inside entity and return specific data
+    
+    Param converter
+        - @Route("user/{id}") function show(User $id){ return $id; }
+        - when you don't need to call entity because symfony already know
     
     one to one relationship
         - relation in the field of new entity
@@ -552,7 +561,7 @@
         }
 
 ## Others topics
-
+    - param converter
     - flash messages
     - cookies
     - session
