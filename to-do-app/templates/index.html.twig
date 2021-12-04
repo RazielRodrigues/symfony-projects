@@ -1,17 +1,11 @@
 {% extends "base.html.twig" %}
-
 {% block body %}
-<!--
-  source: https://www.w3schools.com/howto/howto_js_todolist.asp  (modified by netprogs.pl for the course purposes)
--->
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="./css/styles.css">
 </head>
-
 <body>
   <div class="header">
     <h2>My To Do List</h2>
@@ -20,36 +14,19 @@
       <button type="submit" class="addBtn">Add a task</button>
     </form>
   </div>
-
   <ul>
-    <li>
-      <a href="{{path('switch_status', {"id" : 1} )}}"> <span class="task-list-item">Do shopping </span> </a><a
-        onclick="return confirm('Are you sure to delete?')" href="{{path('delete_task', {"id" : 1} )}}"><span
-          class="close">X</span></a>
-    </li>
-    <li class="checked">
-      <a href="undone"> <span class="task-list-item">Buy eggs </span> </a><a
-        onclick="return confirm('Are you sure to delete?')" href="delete"><span class="close">X</span></a>
-    </li>
-    <li>
-      <a href="done"> <span class="task-list-item">Meet John </span> </a><a
-        onclick="return confirm('Are you sure to delete?')" href="delete"><span class="close">X</span></a>
-    </li>
-    <li>
-      <a href="done"> <span class="task-list-item">Read a book </span> </a><a
-        onclick="return confirm('Are you sure to delete?')" href="delete"><span class="close">X</span></a>
-    </li>
-    <li>
-      <a href="done"> <span class="task-list-item">Learn Doctrine ORM </span> </a><a
-        onclick="return confirm('Are you sure to delete?')" href="delete"><span class="close">X</span></a>
-    </li>
-    <li>
-      <a href="done"> <span class="task-list-item">Prepare a meal </span> </a><a
-        onclick="return confirm('Are you sure to delete?')" href="delete"><span class="close">X</span></a>
-    </li>
+    {% for task in tasks %}
+      <li {% if task.status %} class="checked" {% endif %}>
+          <a href="{{path('switch_status', {"id" : task.id} )}}">
+            <span class="task-list-item">{{task.title}}</span>
+          </a>
+          <a onclick="return confirm('Are you sure to delete?')" 
+             href="{{path('delete_task', {"id" : task.id} )}}">
+             <span class="close">X</span>
+          </a>
+      </li>
+    {% endfor %}
   </ul>
 </body>
-
 </html>
-
 {% endblock %}
