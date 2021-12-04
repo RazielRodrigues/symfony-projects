@@ -42,15 +42,22 @@ class ToDoListController extends AbstractController
      */
     public function switchStatus($id)
     {
-        exit('switch task...' . $id);
+        $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
+
+        $task->setStatus(!$task->getStatus());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('to_do_list');
     }
 
     /**
-     * @Route("/delete/{id}", name="delete_task", methods={"GET"})
+     * @Route("/delete/{id}", name="delete_task")
      */
-    public function delete($id)
+    public function delete(Task $id)
     {
-        exit('delete task...' . $id);
+        $this->getDoctrine()->getManager()->remove($id);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('to_do_list');
     }
 
 }
