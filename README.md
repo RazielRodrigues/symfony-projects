@@ -1,6 +1,6 @@
 # Message brokers
 
-    ...
+    TODO: ESCREVER PARTE TEORICA...
 
 # CQRS
 
