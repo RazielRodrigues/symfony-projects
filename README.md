@@ -1,4 +1,12 @@
-# Symfony Core Features
+# Checkout my projects
+
+    - checkout symfony-to-do-app
+    - checkout symfony-video-social-network-app
+    - checkout symfony-api-platform-app
+    - checkout symfony-message-broker-app
+    - ...
+
+## Symfony Core Features
 
     composer create-project symfony/skeleton my_project_name
 
