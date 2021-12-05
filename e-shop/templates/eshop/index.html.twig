@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}E-shop website!{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+</style>
+<div class="example-wrapper">
+    <h1>E-shop website</h1>
+    search products, order products and signup for sms newsletter!
+    <ul>
+        <li><a href="{{path('search')}}">Search for products</a></li>
+        <li><a href="{{path('order')}}">Finalize your e-basket</a></li>
+        <li><a href="{{path('signup-sms')}}">Signup for SMS newsletter</a></li>
+    </ul>
+</div>
+{% endblock %}
