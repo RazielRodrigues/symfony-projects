@@ -61,6 +61,20 @@
 
     Is a AMPQ server that handle messages and send to different applications
 
+    1. uncomment the entry inside .env
+    2. create the transport at messenger.yaml
+    
+    at this point let's imagine that needs to send to another microservice
+    Needs to configure like the first project
+        - configure the .env
+        - configure the service.yaml
+        - configure the messenger.yaml
+        - create the ques inside RabbitMQ or symfony will do
+        - bind the ques
+        - inside the microservice that you send the action needs to have the command you want to execute
+
+    
+
 ##### Installation
 
     - check: https://dev.to/rezende79/how-to-install-amqp-extension-for-php-7-4-on-windows-10-108d
