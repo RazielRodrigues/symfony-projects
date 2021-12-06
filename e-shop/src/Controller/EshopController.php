@@ -18,10 +18,10 @@ class EshopController extends AbstractController
     /**
      * @var MessageBusInterface
      */
-    protected $messageBusUser;
+    private $messageBus;
 
-    public function __construct(MessageBusInterface $messageBusUser) {
-        $this->messageBusUser = $messageBusUser;
+    public function __construct(MessageBusInterface $messageBus) {
+        $this->messageBus = $messageBus;
     }
 
     /**
@@ -39,7 +39,7 @@ class EshopController extends AbstractController
     {
         $search = 'laptops';
 
-        // $this->messageBusUser->dispatch(new SearchQuery($search));
+        // $this->messageBus->dispatch(new SearchQuery($search));
         $result = $this->handle(new SearchQuery($search));
 
         return new Response("search: {$search} results: {$result}");
