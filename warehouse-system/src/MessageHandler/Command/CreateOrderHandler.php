@@ -1,7 +1,6 @@
 <?php
 
 namespace App\MessageHandler\Command;
-
 use App\Message\Command\CreateOrder;
 
 class CreateOrderHandler
@@ -9,8 +8,7 @@ class CreateOrderHandler
 
     public function __invoke(CreateOrder $createOrder)
     {
-        sleep(4);
-        dump($createOrder);    
+        sleep(10);
     }
 
 }

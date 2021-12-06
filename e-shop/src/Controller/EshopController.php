@@ -39,10 +39,7 @@ class EshopController extends AbstractController
     public function search(): Response
     {
         $search = 'laptops';
-
-        // $this->messageBus->dispatch(new SearchQuery($search));
         $result = $this->handle(new SearchQuery($search));
-
         return new Response("search: {$search} results: {$result}");
     }
 
@@ -61,12 +58,10 @@ class EshopController extends AbstractController
      */
     public function order(): Response
     {
-        $productId = 1;
+        $productId = rand();
         $productName = 'ASUS NOTEBOOK';
-        $productAmount = 2;
-
+        $productAmount = rand();
         $this->messageBus->dispatch(new CreateOrder($productId, $productAmount));
-
         return new Response("Product ID: {$productId}");
     }
 
