@@ -9,7 +9,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\HandleTrait;
 use App\Message\Query\SearchQuery;
 use App\Message\Command\CreateOrder;
-
+use App\Message\Command\SignUpSms;
 
 class EshopController extends AbstractController
 {
@@ -52,6 +52,7 @@ class EshopController extends AbstractController
     public function SignUpSMS(): Response
     {
         $phoneNumber = '111 222 333';
+        $this->messageBus->dispatch(new SignUpSms($phoneNumber));
         return new Response("phone: {$phoneNumber}");
     }
 
