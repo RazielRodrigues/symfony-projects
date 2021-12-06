@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\HandleTrait;
 use App\Message\Query\SearchQuery;
+use App\Message\Command\CreateOrder;
 
 
 class EshopController extends AbstractController
@@ -60,6 +61,11 @@ class EshopController extends AbstractController
     public function order(): Response
     {
         $productId = 1;
+        $productName = 'ASUS NOTEBOOK';
+        $productAmount = 2;
+
+        $this->messageBus->dispatch(new CreateOrder($productId, $productAmount));
+
         return new Response("Product ID: {$productId}");
     }
 
