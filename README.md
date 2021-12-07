@@ -23,6 +23,25 @@
 
 #### Methods
 
+
+    /**
+    * @Route("/blog/{page?}", name="blog_list", methods={POST})
+    */
+    public function index2()
+    {
+        return new Response('Optional parameters in url and 
+        requirements for parameters');
+    }
+
+    /**
+    * @Route("/blog/{page?}", name="blog_list", methods={GET})
+    */
+    public function index2()
+    {
+        return new Response('Optional parameters in url and 
+        requirements for parameters');
+    }
+
     /**
     * @Route("/blog/{page?}", name="blog_list", requirements={"page"="\d+"})
     */
