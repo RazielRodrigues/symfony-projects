@@ -9,13 +9,7 @@
 <script src="../assets/js/bootstrap.js"></script>
 
 
-<script>
-    $('input[type="file"]').change(function (e) {
-        var fileName = e.target.files[0].name;
-        console.log(e.target.files[0]);
-        $('.custom-file-label').html(fileName);
-    });
-</script>
+
 </body>
 
 </html>
