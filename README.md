@@ -4,7 +4,7 @@
     - checkout symfony-video-social-network-app
     - checkout symfony-api-platform-app
     - checkout symfony-message-broker-app
-    - ...
+    - checkout symfony-4-video-app
 
 ## Symfony Core Features
 
