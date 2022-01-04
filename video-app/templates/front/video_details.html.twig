@@ -1,5 +1,6 @@
-<?php include('includes/_header.php'); ?>
-<?php include('includes/_menu.php'); ?>
+{% extends 'base.html.twig' %}
+
+{% block main %}
 
 <br>
 <h1>Video title</h1>
@@ -12,11 +13,11 @@
 <div class="row m-2">
     <a id="video_comments"></a>
 
-    <?php for ($i = 1; $i <= 6; $i++) : ?>
+   {% for i in 1..6 %}
 
     <ul class="list-unstyled text-left">
         <li class="media">
-            <img class="mr-3" src="assets/img/user.jpg" alt="Generic placeholder image">
+            <img class="mr-3" src="{{asset('assets/img/user.jpg')}}" alt="Generic placeholder image">
             <div class="media-body">
                 <h5 class="mt-0 mb-1"><b>John Doe</b> <small class="text-muted">added a comment <small><b>3 days ago</b></small></small></h5>
                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
@@ -27,13 +28,13 @@
     </ul>
     <hr>
 
-    <?php endfor; ?>
+    {% endfor %}
 
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        <form method="POST" action="video_details.php#video_comments">
+        <form method="POST" action="{{path('video_details')}}#video_comments">
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Add a comment</label>
                 <textarea required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -43,7 +44,4 @@
         </form>
     </div>
 </div>
-
-
-<?php include('includes/_footer_links.php'); ?>
-<?php include('includes/_footer.php'); ?>
+{% endblock %}
