@@ -40,7 +40,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/pricing", name="pricing", methods={"POST"})
+     * @Route("/pricing", name="pricing", methods={"GET"})
      */
     public function pricing()
     {
@@ -48,7 +48,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="register", methods={"POST"})
+     * @Route("/register", name="register", methods={"GET"})
      */
     public function register()
     {
@@ -56,7 +56,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="login", methods={"POST"})
+     * @Route("/login", name="login")
      */
     public function login()
     {
