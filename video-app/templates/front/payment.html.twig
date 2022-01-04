@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% block mainadmin %}
+{% block main %}
 <div class="row mt-5">
     <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -29,7 +29,7 @@
 
     <div class="col-md-8 order-md-1">
 
-        <h4 class="mb-3">Pay with PayPal <small>or get other <a href="pricing.php">plan</a></small></h4>
+        <h4 class="mb-3">Pay with PayPal <small>or get other <a href="{{path('pricing')}}">plan</a></small></h4>
         <hr class="mb-4">
         <a href="https://paypal.com" class="btn btn-primary btn-lg btn-block" role="button">Continue to checkout</a>
 
