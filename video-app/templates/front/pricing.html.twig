@@ -1,6 +1,5 @@
-<?php include('includes/_header.php'); ?>
-<?php include('includes/_menu.php'); ?>
-
+{% extends "base.html.twig" %}
+{% block main %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Pricing</h1>
     <p class="lead">Watch the best videos on the planet. Choose a plan that is right for you. Downgrade or upgrade at
@@ -20,7 +19,7 @@
                     <li>Access for one month</li>
                     <li>Help center access</li>
                 </ul>
-                <a role="button" href="register.php" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</a>
+                <a role="button" href="{{path('register')}}" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -35,7 +34,7 @@
                     <li>No ads on videos</li>
                     <li>Help center access</li>
                 </ul>
-                <a role="button" href="register.php" class="btn btn-lg btn-block btn-primary">Get started</a>
+                <a role="button" href="{{path('register')}}" class="btn btn-lg btn-block btn-primary">Get started</a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -51,12 +50,11 @@
                     <li>Help center access</li>
                     <li>Unlimited live events</li>
                 </ul>
-                <a role="button" href="register.php" class="btn btn-lg btn-block btn-primary">Contact us</a>
+                <a role="button" href="{{path('register')}}" class="btn btn-lg btn-block btn-primary">Contact us</a>
             </div>
         </div>
     </div>
 
 </div>
 
-<?php include('includes/_footer_links.php'); ?>
-<?php include('includes/_footer.php'); ?>
+{% endblock %}

@@ -35,7 +35,7 @@
 					<a href="index.php">Awesome Videos</a>
 				</h5>
 
-				<form method="POST" class="form-inline my-0 mr-md-auto" action="search_results.php">
+				<form method="POST" class="form-inline my-0 mr-md-auto" action="{{path('search_results')}}">
 					<input class="form-control mr-sm-2" type="search" placeholder="video title" aria-label="Search video">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search video</button>
 				</form>
@@ -48,8 +48,8 @@
 					<a class="p-2 text-dark" href="{{path('video_list')}}">Motivating</a>
 					<a class="p-2 text-dark" href="admin/my_profile.php">My account</a>
 				</nav>
-				<a class="btn btn-outline-primary mr-2" href="pricing.php">Sign up</a>
-				<a class="btn btn-outline-primary" href="login.php">Sign in</a>
+				<a class="btn btn-outline-primary mr-2" href="{{path('pricing')}}">Sign up</a>
+				<a class="btn btn-outline-primary" href="{{path('login')}}">Sign in</a>
 			</div>
 		{% endblock %}
 

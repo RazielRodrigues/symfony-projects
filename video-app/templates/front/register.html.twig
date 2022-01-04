@@ -1,5 +1,6 @@
-<?php include('includes/_header.php'); ?>
-<?php include('includes/_menu.php'); ?>
+{% extends "base.html.twig" %}
+
+{% block main %}
 
 <div class="row mt-5">
     <div class="col-md-4 order-md-2 mb-4">
@@ -79,6 +80,9 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block customjavascripts %}
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -114,6 +118,4 @@
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 </script>
-
-<?php include('includes/_footer_links.php'); ?>
-<?php include('includes/_footer.php'); ?>
+{% endblock %}
