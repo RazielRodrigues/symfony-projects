@@ -2,24 +2,20 @@
 {% block mainadmin %}
 <h2>Editing category</h2>
 
-<form action="#" method="POST">
-    <input type="text" class="form-control is-invalid" id="validationServer01" placeholder="Category name" value="Funny"
-        required>
+{{ form_start(form, {'attr': {'novalidate':'novalidate'} }) }}
+    {# <input type="text" class="form-control is-invalid" id="validationServer01" placeholder="Category name" value="Funny"
+        required> #}
+        {{ form_widget(form.name,{'attr': {'class': 'form-control' ~ is_invalid, 'placeholder': 'Category name'}, 'id': 'validationServer01' }) }}
     <br>
     <label for="inlineFormCustomSelect">Parent:</label>
-    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-        <option value="1">Funny</option>
-        <option value="1">--For kids</option>
-        <option value="1">--For adults</option>
-        <option value="1">----For 60+</option>
-        <option value="2">Scary</option>
-        <option value="3">Motivating</option>
+    <select name="category[parent]" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        {{render(controller('App\\Controller\\AdminController::getAllCategories',{'editedCategory':category}))}}
     </select>
     <div class="invalid-feedback">
-        Category already exists!
+        {{ form_errors(form.name) }}
     </div>
     <button class="btn btn-primary mt-3" type="submit">Save</button>
 
-</form>
+{{ form_end(form) }}
 {% endblock %}
 

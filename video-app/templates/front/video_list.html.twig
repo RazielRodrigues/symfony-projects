@@ -9,7 +9,7 @@
     <section class="jumbotron text-center">
         <div class="container">
 
-            <h1 class="jumbotron-heading">Category - Funny</h1>
+            <h1 class="jumbotron-heading">Category - {{subcategories.currentCategoryName}}</h1>
             <div class="btn-group">
                 <div class="dropdown ml-2">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -18,15 +18,8 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <ul class="mr-5">
-                            <li><a href="#">Funny</a></li>
-                            <ul>
-                                <li><a href="#">Surprising</a></li>
-                                <li><a href="#">Exciting</a></li>
-                                <ul>
-                                    <li><a href="#">Strange</a></li>
-                                    <li><a href="#">Relaxing</a></li>
-                                </ul>
-                            </ul>
+                        <li><a href="{{path('video_list',{'categoryname':subcategories.mainParentName|slugify|lower, 'id':subcategories.mainParentId})}}">{{subcategories.mainParentName}}</a></li>
+                           {{subcategories.categorylist|raw}}
                         </ul>
                     </div>
                 </div>
