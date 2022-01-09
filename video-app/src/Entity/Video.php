@@ -28,7 +28,7 @@ class Video
     private $path;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $duration;
 
@@ -36,11 +36,6 @@ class Video
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="videos")
      */
     private $category;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $a;
 
     public function getId(): ?int
     {
@@ -76,7 +71,7 @@ class Video
         return $this->duration;
     }
 
-    public function setDuration(int $duration): self
+    public function setDuration(?int $duration): self
     {
         $this->duration = $duration;
 
@@ -91,18 +86,6 @@ class Video
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    public function getA(): ?string
-    {
-        return $this->a;
-    }
-
-    public function setA(?string $a): self
-    {
-        $this->a = $a;
 
         return $this;
     }
