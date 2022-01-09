@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Category;
+use App\Utils\CategoryTreeFrontPage;
 
 class FrontController extends AbstractController
 {
@@ -16,10 +18,11 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/video-list", name="video_list")
+     * @Route("/video-list/category/{categoryname},{id}", name="video_list")
      */
-    public function videoList()
+    public function videoList($id, CategoryTreeFrontPage $categories)
     {
+        dump($categories);
         return $this->render('front/video_list.html.twig');
     }
 
@@ -32,7 +35,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/search-results", name="search_results", methods={"POST"})
+     * @Route("/search-results", methods={"POST"}, name="search_results")
      */
     public function searchResults()
     {
@@ -40,7 +43,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/pricing", name="pricing", methods={"GET"})
+     * @Route("/pricing", name="pricing")
      */
     public function pricing()
     {
@@ -48,7 +51,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="register", methods={"GET"})
+     * @Route("/register", name="register")
      */
     public function register()
     {
@@ -71,6 +74,14 @@ class FrontController extends AbstractController
         return $this->render('front/payment.html.twig');
     }
 
-
+    public function mainCategories()
+    {
+        $categories = $this->getDoctrine()
+        ->getRepository(Category::class)
+        ->findBy(['parent'=>null], ['name'=>'ASC']);
+        return $this->render('front/_main_categories.html.twig',[
+            'categories'=>$categories
+        ]);
+    }
 }
 
