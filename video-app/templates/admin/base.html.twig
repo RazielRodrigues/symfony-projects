@@ -11,9 +11,9 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">Awesome Videos</h5>
         <a class="nav-link active" href="{{path('main_page')}}"> Go to public site</a>      
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark">Logged as John Smith</a>
+           <a class="p-2 text-dark">Logged as {{ app.user.name }} {{ app.user.lastname }}</a>
         </nav>
-        <a class="btn btn-outline-primary" href="#">Logout</a>
+        <a class="btn btn-outline-primary" href="{{path('logout')}}">Logout</a>
     </div>
 
         <div class="row">
@@ -26,18 +26,21 @@
                                 My profile
                             </a>
                         </li>
+                        {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{path('categories')}}">
                                 <span data-feather="file"></span>
                                 Categories
                             </a>
                         </li>
+                        {% endif  %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{path('videos')}}">
                                 <span data-feather="shopping-cart"></span>
                                 Videos
                             </a>
                         </li>
+                         {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{path('upload_video')}}">
                                 <span data-feather="shopping-cart"></span>
@@ -50,6 +53,7 @@
                                 Users
                             </a>
                         </li>
+                         {% endif %}
                     </ul>
                     
                 </div>

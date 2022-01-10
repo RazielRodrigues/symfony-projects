@@ -1,7 +1,5 @@
-{% extends "base.html.twig" %}
-
+{% extends 'base.html.twig' %}
 {% block main %}
-
 <div class="row mt-5">
     <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -31,57 +29,66 @@
 
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Register first (free)</h4>
-        <form method="POST" action="#" class="needs-validation" novalidate>
+        {# <form method="POST" action="#" class="needs-validation" novalidate> #}
+        {{ form_start(form,{'attr': {'novalidate':'novalidate','class':'needs-validation'}}) }}
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="firstName">First name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    <label for="user_name">First name</label>
+                    {# <input type="text" class="form-control" id="firstName" placeholder="" value="" required> #}
+                    {{ form_widget(form.name) }} 
                     <div class="invalid-feedback">
                         Valid first name is required.
+                        {{form_errors(form.name)}}
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="lastName">Last name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                    <label for="user_last_name">Last name</label>
+                    {# <input type="text" class="form-control" id="lastName" placeholder="" value="" required> #}
+                    {{ form_widget(form.last_name) }} 
                     <div class="invalid-feedback">
                         Valid last name is required.
+                        {{form_errors(form.last_name)}}
                     </div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                <label for="user_email">Email</label>
+                {# <input type="email" class="form-control" id="email" placeholder="you@example.com" required> #}
+                {{ form_widget(form.email) }} 
                 <div class="invalid-feedback">
-                    Please enter a valid email address for shipping updates.
+                    Please enter a valid email address.
+                     {{form_errors(form.email)}}
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" required>
+                <label for="user_password_first">Password</label>
+                {# <input type="password" class="form-control" id="password" required> #}
+                {{ form_widget(form.password.first) }} 
                 <div class="invalid-feedback">
-                    Please enter a valid password (min 6 characters).
+                     Please enter a valid password.
+                    {{form_errors(form.password.first)}}
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm_password" required>
+                <label for="user_password_second">Confirm Password</label>
+                {# <input type="password" class="form-control" id="confirm_password" required> #}
+                {{ form_widget(form.password.second) }}
                 <div class="invalid-feedback">
-                    Please enter a valid password confirmation (min 6 characters).
+                     Please enter a valid password confirmation.
+                     {{form_errors(form.password.second)}}
                 </div>
             </div>
 
             <hr class="mb-4">
-            <a href="{{path('register')}}" class="btn btn-primary btn-lg btn-block" role="button">Register</a>
-        </form>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+         {{ form_end(form) }}
 
     </div>
 </div>
-
 {% endblock %}
-
 {% block customjavascripts %}
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -106,7 +113,7 @@
     })();
 
 
-    var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+    var password = document.getElementById("user_password_first"), confirm_password = document.getElementById("user_password_second");
 
     function validatePassword() {
         if (password.value != confirm_password.value) {
@@ -119,3 +126,5 @@
     confirm_password.onkeyup = validatePassword;
 </script>
 {% endblock %}
+
+
