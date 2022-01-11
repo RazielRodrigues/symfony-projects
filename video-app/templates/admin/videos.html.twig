@@ -21,11 +21,11 @@
       </tr>
     </thead>
     <tbody>
-        {% for i in 1..10 %}
+        {% for video in videos %}
       <tr>
-        <td>{{i}}</td>
-        <td>Video name</td>
-        <td><a target="_blank" href="http://vimeo.com">go to video</a></td>
+        <td>{{ loop.index }}</td>
+        <td>{{video.title}}</td>
+        <td><a target="_blank" href="{{path('video_details',{'video':video.id})}}">go to video</a></td>
          {% if is_granted('ROLE_ADMIN') %}
         <td>
             <form action="#" method="POST">
@@ -46,6 +46,7 @@
     </tbody>
   </table>
 </div>
+{% endblock %}
 {% block customjavascripts %}
 {{parent()}}
 <script>
@@ -60,7 +61,5 @@
         }
     }
 </script>
-{% endblock %}
-
 {% endblock %}
 

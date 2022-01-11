@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 {% block main %}
 <div class="row mt-5">
     <div class="col-md-4 order-md-2 mb-4">
@@ -9,9 +9,9 @@
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
-                    <h6 class="my-0">Pro plan</h6>
+                    <h6 class="my-0">{{app.session.get('planName')|capitalize}} plan</h6>
                 </div>
-                <span class="text-muted">$15</span>
+                <span class="text-muted">${{app.session.get('planPrice')}}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">
@@ -22,7 +22,8 @@
             </li>
             <li class="list-group-item d-flex justify-content-between">
                 <span>Total (USD)</span>
-                <strong>$15</strong>
+
+                <strong>${{app.session.get('planPrice')}}</strong>
             </li>
         </ul>
     </div>
@@ -31,7 +32,7 @@
 
         <h4 class="mb-3">Pay with PayPal <small>or get other <a href="{{path('pricing')}}">plan</a></small></h4>
         <hr class="mb-4">
-        <a href="https://paypal.com" class="btn btn-primary btn-lg btn-block" role="button">Continue to checkout</a>
+        <a href="{{path('payment',{'paypal':'paypal'})}}" class="btn btn-primary btn-lg btn-block" role="button">Continue to checkout</a>
 
     </div>
 </div>

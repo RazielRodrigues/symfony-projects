@@ -1,5 +1,9 @@
 <?php
-
+/*
+|--------------------------------------------------------
+| copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
+|--------------------------------------------------------
+*/
 namespace App\Form;
 
 use App\Entity\Category;
@@ -13,7 +17,9 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('name',TextType::class,[
+                'empty_data'=>''
+            ])
         ;
     }
 

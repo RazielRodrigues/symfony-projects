@@ -1,33 +1,18 @@
 <?php
-
+/*
+|--------------------------------------------------------
+| copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
+|--------------------------------------------------------
+*/
 namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Entity\Category;
+use App\Tests\RoleAdmin;
 
 class AdminControllerCategoriesTest extends WebTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->client = static::createClient([], [
-            'PHP_AUTH_USER' => 'jw@symf4.loc',
-            'PHP_AUTH_PW' => 'passw',
-        ]);
-        $this->client->disableReboot();
-
-        $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $this->entityManager->beginTransaction();
-        $this->entityManager->getConnection()->setAutoCommit(false);
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-        $this->entityManager->rollback();    
-        $this->entityManager->close();    
-        $this->entityManager = null; // avoid memory leaks   
-    }
+    use RoleAdmin;
 
     public function testTextOnPage()
     {

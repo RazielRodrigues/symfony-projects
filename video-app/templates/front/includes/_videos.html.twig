@@ -3,45 +3,38 @@
 
             <div class="row">
                 {% for video in videos %}
+
+                {% if video_no_members is not null %}
+                    {% set videoid = 'https://player.vimeo.com/video/' ~ video_no_members %}
+                {% else %}
+                    {% set videoid = video.vimeoid %}
+                {% endif %}
+
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <div align="center" class="embed-responsive embed-responsive-16by9">
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
-                            <iframe class="" src="{{video.getPath()}}" frameborder="0"
-                                allowfullscreen></iframe>
-                        {% else %}
-                            <iframe class="" src="https://player.vimeo.com/video/113716040" frameborder="0"
-                                allowfullscreen></iframe>
-                        {% endif %}
+
+                                <iframe class="" src="{{videoid}}" frameborder="0"
+                                 allowfullscreen></iframe> 
+
                         </div>
                         <div class="card-body">
                             <h3>{{video.getTitle()}}</h3>
-                            {% if not app.user  %}
+
+                            {% if not app.user or video_no_members is not null   %} 
+
                             <p class="card-text text-danger">Video for <b>MEMBERS</b> only. <a href="{{path('pricing')}}">Sign
                                     up</a> for one month for free.</p>
                             {% endif  %}
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
 
-                                    <i class="fa fa-thumbs-up"><small class="text-muted">(23)</small></i>&nbsp;
-                                    <i class="fa fa-thumbs-down"><small class="text-muted">(9)</small></i>
+                                    <i class="fa fa-thumbs-up"><small class="text-muted number-of-likes-{{video.id}}">({{video.usersthatlike.count}})</small></i>&nbsp;
+                                    <i class="fa fa-thumbs-down"><small class="text-muted number-of-dislikes-{{video.id}}">({{video.usersthatdontlike.count}})</small></i>
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
-                                    <button data-toggle="tooltip" data-placement="top" title="Click to like the video"
-                                        type="button" class="btn btn-primary btn-outline-success btn-sm ml-1">
-                                        <i class="fa fa-thumbs-up"></i>
-                                    </button>
-                                    <!-- <button data-toggle="tooltip" data-placement="top" title="You like the video. Click to unlike" type="button" class="btn btn-primary btn-outline-success btn-sm mr-2">
-                                    <i class="fa fa-thumbs-up"></i>
-                                    </button> -->
-                                    <button data-toggle="tooltip" data-placement="top" title="Click to dislike the video"
-                                        type="button" class="btn btn-primary btn-outline-danger btn-sm ml-1 mr-1">
-                                        <i class="fa fa-thumbs-down"></i>
-                                    </button>
-                                    <!-- <button data-toggle="tooltip" data-placement="top" title="You don't like the video. Click to undo" type="button" class="btn btn-primary btn-outline-danger btn-sm mr-2">
-                                    <i class="fa fa-thumbs-down"></i>
-                                    </button> -->
+                                    {{ include('front/includes/_likes.html.twig', {'video' : video}) }}
                                     {% endif  %}
-                                    <a class="ml-1" href="{{path('video_details')}}#video_comments">Comments (32)</a>
+                                    <a class="ml-1" href="{{path('video_details',{'video':video.id})}}#video_comments">Comments ({{video.comments.count}})</a>
                                 </div>
                                 <small class="text-muted">{{video.getDuration()}} mins</small>
                             </div>

@@ -1,7 +1,13 @@
 <?php
-
+/*
+|--------------------------------------------------------
+| copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
+|--------------------------------------------------------
+*/
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -57,6 +63,29 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $vimeo_api_key;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Video", mappedBy="usersThatLike")
+     * @ORM\JoinTable(name="likes")
+     */
+    private $likedVideos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Video", mappedBy="usersThatDontLike")
+     * @ORM\JoinTable(name="dislikes")
+     */
+    private $dislikedVideos;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Subscription", cascade={"persist", "remove"}, orphanRemoval=true)   
+     */
+    private $subscription;
+
+    public function __construct()
+    {
+        $this->likedVideos = new ArrayCollection();
+        $this->dislikedVideos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -168,6 +197,74 @@ class User implements UserInterface
     public function setVimeoApiKey(?string $vimeo_api_key): self
     {
         $this->vimeo_api_key = $vimeo_api_key;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getLikedVideos(): Collection
+    {
+        return $this->likedVideos;
+    }
+
+    public function addLikedVideo(Video $likedVideo): self
+    {
+        if (!$this->likedVideos->contains($likedVideo)) {
+            $this->likedVideos[] = $likedVideo;
+            $likedVideo->addUsersThatLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedVideo(Video $likedVideo): self
+    {
+        if ($this->likedVideos->contains($likedVideo)) {
+            $this->likedVideos->removeElement($likedVideo);
+            $likedVideo->removeUsersThatLike($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getDislikedVideos(): Collection
+    {
+        return $this->dislikedVideos;
+    }
+
+    public function addDislikedVideo(Video $dislikedVideo): self
+    {
+        if (!$this->dislikedVideos->contains($dislikedVideo)) {
+            $this->dislikedVideos[] = $dislikedVideo;
+            $dislikedVideo->addUsersThatDontLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDislikedVideo(Video $dislikedVideo): self
+    {
+        if ($this->dislikedVideos->contains($dislikedVideo)) {
+            $this->dislikedVideos->removeElement($dislikedVideo);
+            $dislikedVideo->removeUsersThatDontLike($this);
+        }
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }

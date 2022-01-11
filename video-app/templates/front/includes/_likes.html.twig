@@ -1,0 +1,25 @@
+{% if video in app.user.getLikedVideos %}
+{% set userLikesVideo = 'userLikesVideo' %}
+{% elseif video in app.user.getDislikedVideos %}
+{% set userDoesNotLikeVideo = 'userDoesNotLikeVideo' %}
+{% else %}
+{% set noActionYet = 'noActionYet' %}
+{% endif %}
+
+<button data-toggle="tooltip" data-placement="top" title="Click to like the video" type="button" class="btn btn-primary btn-outline-success btn-sm ml-1 video-id-{{video.id}}  click-to-like-video {{noActionYet|default(null)}}">
+    <i  href="{{path('like_video',{'video':video.id})}}" class="fa fa-thumbs-up toogle-likes"></i>
+</button>
+
+<button data-toggle="tooltip" data-placement="top" title="You like the video. Click to unlike" type="button" class="btn btn-primary btn-outline-success btn-sm mr-2 ml-1 likes-video-id-{{video.id}} click-to-unlike-video {{userLikesVideo|default(null)}}">
+    <i href="{{path('undo_like_video',{'video':video.id})}}" class="fa fa-thumbs-up toogle-likes"></i>
+</button>
+
+<button data-toggle="tooltip" data-placement="top" title="Click to dislike the video" type="button" class="btn btn-primary btn-outline-danger btn-sm ml-1 mr-1 video-id-{{video.id}}  click-to-dislike-video {{noActionYet|default(null)}}">
+    <i href="{{path('dislike_video',{'video':video.id})}}" class="fa fa-thumbs-down toogle-likes"></i>
+</button>
+
+<button data-toggle="tooltip" data-placement="top" title="You don't like the video. Click to undo" type="button" class="btn btn-primary btn-outline-danger btn-sm mr-2 ml-1 dislikes-video-id-{{video.id}} click-to-undo-dislike-video {{userDoesNotLikeVideo|default(null)}}">
+   <i href="{{path('undo_dislike_video',{'video':video.id})}}" class="fa fa-thumbs-down toogle-likes"></i>
+</button>
+
+

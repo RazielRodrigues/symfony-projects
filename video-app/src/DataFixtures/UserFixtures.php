@@ -1,11 +1,15 @@
 <?php
-
+/*
+|--------------------------------------------------------
+| copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
+|--------------------------------------------------------
+*/
 namespace App\DataFixtures;
 
-use App\Entity\User;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Entity\User;
 
 class UserFixtures extends Fixture
 {
@@ -37,7 +41,9 @@ class UserFixtures extends Fixture
 
             ['John', 'Wayne', 'jw@symf4.loc', 'passw', 'hjd8dehdh', ['ROLE_ADMIN']],
             ['John', 'Wayne2', 'jw2@symf4.loc', 'passw', null, ['ROLE_ADMIN']],
-            ['John', 'Doe', 'jd@symf4.loc', 'passw', null, ['ROLE_USER']]
+            ['John', 'Doe', 'jd@symf4.loc', 'passw', null, ['ROLE_USER']],
+            ['Ted', 'Bundy', 'tb@symf4.loc', 'passw', null, ['ROLE_USER']] 
+           
 
         ];
     }
