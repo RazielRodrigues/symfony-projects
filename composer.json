@@ -46,7 +46,8 @@
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "symfony/maker-bundle": "^1.0"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.7",
@@ -54,7 +55,6 @@
         "symfony/browser-kit": "5.4.*",
         "symfony/css-selector": "5.4.*",
         "symfony/debug-bundle": "5.4.*",
-        "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/stopwatch": "5.4.*",
         "symfony/web-profiler-bundle": "5.4.*"
@@ -97,8 +97,7 @@
         "compile": [
             "php bin/console doctrine:schema:drop -n -q --force --full-database",
             "php bin/console make:migration",
-            "php bin/console doctrine:migrations:migrate -n -q",
-            "php bin/console doctrine:fixtures:load -n -q"
+            "php bin/console doctrine:migrations:migrate -n -q"
         ]
     },
     "conflict": {
