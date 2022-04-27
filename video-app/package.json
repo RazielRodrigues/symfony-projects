@@ -1,0 +1,22 @@
+{
+  "name": "video-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@symfony/webpack-encore": "^1.7.0",
+    "jquery": "^3.6.0",
+    "webpack-notifier": "^1.6.0"
+  }
+}

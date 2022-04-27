@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
+
+    <style>
+        .form-control {
+        background-color: #f8f5f5;
+        }
+    </style>
+
+    <link rel="stylesheet" href="{{asset('assets/css/fontawesome.min.css')}}">
+
+    {% block customstylesheets %}{% endblock %}
+
+    <title>{% block title %}Symfony 4 course app - video sharing service{% endblock %}</title>
+
+</head>
+
+<body class="text-center">
+    <div class="container-fluid">
+{% block menu %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{{path('main_page')}}">Awesome Videos</a></h5>
+
+    <form method="GET" class="form-inline my-0 mr-md-auto" action="{{path('search_results')}}">
+        <input name="query" class="form-control mr-sm-2" type="search" placeholder="video title" aria-label="Search video">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search video</button>
+    </form>
+
+    <nav class="my-2 my-md-0 mr-md-3">        
+        {{ render(controller("App\\Controller\\FrontController::mainCategories")) }}
+        {% if  app.user  %}
+        <a class="p-2 text-dark" href="{{path('admin_main_page')}}">My account</a>
+        {% endif %}
+    </nav>
+    {% if  not app.user  %}
+    <a class="btn btn-outline-primary mr-2" href="{{path('pricing')}}">Sign up</a>
+    <a class="btn btn-outline-primary" href="{{path('login')}}">Sign in</a>
+     {% endif %}
+</div>
+{% endblock %}
+{% block main %}
+{% endblock %}
+{% block footer_links %}
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+        <div class="col-12 col-md">
+            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Features</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Live streaming</a></li>
+                <li><a class="text-muted" href="#">Video player</a></li>
+                <li><a class="text-muted" href="#">Monetization</a></li>
+                <li><a class="text-muted" href="#">Hosting</a></li>
+                <li><a class="text-muted" href="#">Privacy</a></li>
+                <li><a class="text-muted" href="#">Analytics</a></li>
+                <li><a class="text-muted" href="#">Speed test</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Help center</a></li>
+                <li><a class="text-muted" href="#">Blog</a></li>
+                <li><a class="text-muted" href="#">Guidelines</a></li>
+                <li><a class="text-muted" href="#">Developers</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Team</a></li>
+                <li><a class="text-muted" href="#">Contact</a></li>
+                <li><a class="text-muted" href="#">Jobs</a></li>
+                <li><a class="text-muted" href="#">Partners</a></li>
+                <li><a class="text-muted" href="#">Terms</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+    </div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{{asset('assets/js/jquery.js')}}"></script>
+<script src="{{asset('assets/js/popper.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.js')}}"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+{% block customjavascripts %}{% endblock %}
+</body>
+</html>

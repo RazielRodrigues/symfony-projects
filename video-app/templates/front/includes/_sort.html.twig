@@ -1,0 +1,13 @@
+<div class="form-row align-items-center ml-3">
+     <form id="form-sorting" action="" method="GET">
+        <select name="sortby" class="custom-select mr-sm-2" id="inlineFormCustomSelect" onchange='this.form.submit();'>
+            <option selected>Sort...</option>
+            <option value="rating">Highest rated</option>
+            <option value="asc">Title A-Z</option>
+            <option value="desc">Title Z-A</option>
+        </select>
+        {% if query is defined %}
+        <input type="hidden" name="query" value="{{query}}">
+        {% endif %}
+    </form>
+</div>

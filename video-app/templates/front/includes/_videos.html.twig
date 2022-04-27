@@ -1,0 +1,48 @@
+<div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                {% for video in videos %}
+
+                {% if video_no_members is not null %}
+                    {% set videoid = 'https://player.vimeo.com/video/' ~ video_no_members %}
+                {% else %}
+                    {% set videoid = video.vimeoid %}
+                {% endif %}
+
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div align="center" class="embed-responsive embed-responsive-16by9">
+
+                                <iframe class="" src="{{videoid}}" frameborder="0"
+                                 allowfullscreen></iframe> 
+
+                        </div>
+                        <div class="card-body">
+                            <h3>{{video.getTitle()}}</h3>
+
+                            {% if not app.user or video_no_members is not null   %} 
+
+                            <p class="card-text text-danger">Video for <b>MEMBERS</b> only. <a href="{{path('pricing')}}">Sign
+                                    up</a> for one month for free.</p>
+                            {% endif  %}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+
+                                    <i class="fa fa-thumbs-up"><small class="text-muted number-of-likes-{{video.id}}">({{video.usersthatlike.count}})</small></i>&nbsp;
+                                    <i class="fa fa-thumbs-down"><small class="text-muted number-of-dislikes-{{video.id}}">({{video.usersthatdontlike.count}})</small></i>
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                                    {{ include('front/includes/_likes.html.twig', {'video' : video}) }}
+                                    {% endif  %}
+                                    <a class="ml-1" href="{{path('video_details',{'video':video.id})}}#video_comments">Comments ({{video.comments.count}})</a>
+                                </div>
+                                <small class="text-muted">{{video.getDuration()}} mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               {% endfor %}
+
+            </div>
+        </div>
+    </div>
