@@ -17,7 +17,7 @@ docker compose up -d or Symfony server:start
 
 https://symfonycasts.com/u/razielrodrigues/badges/133
 
-<img src="cosmic.jpg">
+<img src="cosmic.png">
 
 # SYMFONY 6 HARMONIUS
 
