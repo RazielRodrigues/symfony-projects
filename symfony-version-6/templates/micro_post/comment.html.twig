@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block bread %}
+  → <a href="{{ path('app_micro_post_show', { post: post.id }) }}">{{ post.title }}</a> → Add Comment
+{% endblock %}
+{% block body %}
+  {{ include('micro_post/_post.html.twig', { post: post }) }}
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<div>{{ form_errors(form) }}</div>
+
+<div>
+    {{ form_label(form.text, 'Please enter the post comment', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+    {{ form_widget(form.text, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}}) }}
+    {{ form_errors(form.text) }}
+</div>
+
+<div>
+    <button type="submit" class="block w-full shadow-sm border-transparent bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Comment!</button>
+</div>
+{{ form_end(form) }}
+
+
+{% endblock %}

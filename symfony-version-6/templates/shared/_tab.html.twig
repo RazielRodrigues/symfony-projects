@@ -1,0 +1,9 @@
+<div class="{% if app.request.get('_route') == route %}
+
+  {% endif %} pb-2 {% if classes is defined %}{{ classes }}{% endif %}">
+  <a href="{% block path %}
+    {% endblock %}">
+    {% block content %}
+    {% endblock %}
+  </a>
+</div>

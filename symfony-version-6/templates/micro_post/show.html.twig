@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Post - {{ post.title }}
+{% endblock %}
+
+{% block bread %}
+  → Post
+{% endblock %}
+
+{% block body %}
+  <div class="flex items-center mb-4">
+    <div>{{ include('shared/_avatar.html.twig', { profile: post.author.userProfile, size: 16 }) }}</div>
+    <div class="ml-4">
+      <div class="text-xl">{{ post.author.userProfile.name ?? post.author.email }}</div>
+      <div class="text-sm text-gray-500 dark:text-gray-400">
+        <a href="{{ path('app_profile', { id: post.author.id }) }}">{{ post.author.email }}</a>
+      </div>
+    </div>
+  </div>
+
+  {{ include('micro_post/_post.html.twig', { post: post }) }}
+
+  <div class="mt-4">
+    {% for commen in post.comment %}
+      <div>
+        <div class="flex items-center">
+          <div class="mr-2">{{ include('shared/_avatar.html.twig', { profile: commen.author.userProfile, size: 8 }) }}</div>
+          <div>
+            <div class="font-medium text-gray-800 dark:text-gray-300">
+              <a href="{{ path('app_profile', { id: commen.author.id }) }}">{{ commen.author.email }}</a>
+            </div>
+            <div class="font-light text-gray-500 dark:text-gray-500">{{ commen.created|date('M j, Y') }}</div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="border ml-4 mr-6 pb-12 {% if not loop.last %}{% endif %}"></div>
+          <div>{{ commen.text }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div>
+		<h1>
+			SO UMA
+		</h1>
+		{% if messages.message %}
+
+			<div>
+				{{messages.message}}
+			</div>
+			{{ include ("hello/_message.html.twig", {  message: messages }) }}
+
+
+		{% else %}
+			<h1>
+				nada por aqui...</h1>
+
+		{% endif %}
+
+	</div>
+{% endblock %}
+
+{% block title %}Teste meu parceiro...
+{% endblock %}

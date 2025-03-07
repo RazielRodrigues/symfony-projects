@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div>
+		<h1>
+			PAGINA INICIAL
+		</h1>
+		{% if messages|length > 1 %}
+			{% for key, message in messages|slice(0, limit) %}
+				<h1>{{message.message}}</h1>
+				<a href="{{path('app_show_one', {'id' : key } )}}">ver mensagem</a>
+
+
+				{{ include ("hello/_message.html.twig", {  message: message }) }}
+			{% endfor %}
+		{% else %}
+			<h1>nada por aqui...</h1>
+		{% endif %}
+	</div>
+{% endblock %}
+
+{% block title %}PAGINA INICIAL!
+{% endblock %}
