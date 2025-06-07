@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Create new Event Registration</h1>
+
+    {{ include('registration/_form.html.twig') }}
+
+    <br>
+    <a class="btn btn-secondary" href="{{ path('app_department_index') }}">back to departments</a>
+
+{% endblock %}
